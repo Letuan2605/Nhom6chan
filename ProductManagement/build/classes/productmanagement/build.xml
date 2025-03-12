@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/XML/XMLDocument.xml to edit this template
+-->
+
+
+
+<root>
+   <project name="ProductManagement" default="build" basedir=".">
+    <!-- Định nghĩa các thư mục cần thiết -->
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="dist.dir" value="dist"/>
+
+    <!-- Xóa thư mục build và dist trước khi build -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${dist.dir}"/>
+    </target>
+
+    <!-- Tạo lại thư mục build và dist -->
+    <target name="init" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${dist.dir}"/>
+    </target>
+
+    <!-- Compile code từ src sang build -->
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.dir}"/>
+    </target>
+
+    <!-- Tạo file JAR -->
+    <target name="build" depends="compile">
+        <jar destfile="${dist.dir}/ProductManagement.jar" basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="Product"/>
+            </manifest>
+        </jar>
+    </target>
+</project>
+ 
+</root>
+
